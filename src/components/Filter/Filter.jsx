@@ -3,7 +3,6 @@ import { nanoid } from 'nanoid';
 import PropTypes from 'prop-types';
 
 import { changeFilter, getFilter } from 'redux/filterSlice';
-
 import css from './Filter.module.css';
 
 export const Filter = () => {
