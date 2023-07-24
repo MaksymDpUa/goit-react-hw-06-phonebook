@@ -6,27 +6,27 @@ import { nanoid } from 'nanoid';
 //       payload: contactsFromStorage,
 //     };
 // }
-export const changeFilter = (value) => {
-    return {
-        type: 'filter/changeFilter',
-        payload: value
-    };
-}
+// export const changeFilter = value => {
+//   return {
+//     type: 'filter/changeFilter',
+//     payload: value,
+//   };
+// };
 
-export const addContactToRedux = (name, number) => {
-  return {
-    type: 'contacts/addContact',
-    payload: {
-      name,
-      number,
-      id: nanoid(),
-    },
-  };
-};
+// export const addContactToRedux = (name, number) => {
+//   return {
+//     type: 'contacts/addContact',
+//     payload: {
+//       name,
+//       number,
+//       id: nanoid(),
+//     },
+//   };
+// };
 
-export const deleteContact = id => {
-  return {
-    type: 'contacts/deleteContact',
-    payload: id,
-  };
-};
+// export const deleteContact = id => {
+//   return {
+//     type: 'contacts/deleteContact',
+//     payload: id,
+//   };
+// };

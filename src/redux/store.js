@@ -1,5 +1,5 @@
-import { combineReducers, createStore } from 'redux';
-import { devToolsEnhancer } from '@redux-devtools/extension';
+// import { combineReducers, createStore } from 'redux';
+// import { devToolsEnhancer } from '@redux-devtools/extension';
 import { contactsReducer } from './contactsSlice';
 import { filterReducer } from './filterSlice';
 
@@ -46,12 +46,6 @@ import { filterReducer } from './filterSlice';
 //   }
 // };
 
-const enhancer = devToolsEnhancer();
-
-const rootReducer = combineReducers({
-  contacts: contactsReducer,
-  filter: filterReducer,
-});
 // // Поки що використовуємо редюсер який
 // // тільки повертає отриманий стан
 // const rootReducer = (state = contactsInitialState, action) => {
@@ -77,4 +71,42 @@ const rootReducer = combineReducers({
 //       return state;
 //   }
 // };
-export const store = createStore(rootReducer, enhancer);
+
+import { configureStore } from '@reduxjs/toolkit';
+import {
+  persistStore,
+  persistReducer,
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+} from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
+// import rootReducer from './todoSlice';
+
+const persistConfig = {
+  key: 'root',
+  version: 1,
+  storage,
+};
+
+const persistedReducer = persistReducer(persistConfig, contactsReducer);
+
+export const store = configureStore({
+  reducer: {
+    contacts: persistedReducer,
+    filter: filterReducer,
+  },
+  middleware: getDefaultMiddleware =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }),
+});
+
+export const persistor = persistStore(store);
+
+// yy

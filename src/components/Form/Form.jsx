@@ -6,6 +6,7 @@ import css from './Form.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { addContactToRedux } from 'redux/actions';
 import { getContacts } from 'redux/selectors';
+import { addContact } from 'redux/contactsSlice';
 
 export const Form = () => {
   const [name, setName] = useState('');
@@ -39,8 +40,8 @@ export const Form = () => {
       alert(`${name} is already in your contacts`);
       return;
     }
-
-    dispatch(addContactToRedux(name, Number(number)));
+    dispatch(addContact(name, Number(number)));
+    // dispatch(addContactToRedux(name, Number(number)));
     setName('');
     setNumber('');
   };
